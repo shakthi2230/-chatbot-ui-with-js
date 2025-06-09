@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .animate-fade-in {
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .card-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
+        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .card-hover:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -38,16 +25,8 @@
             color: #f97316;
         }
 
-        .sidebar-item.active svg {
-            color: #f97316;
-        }
-
-        /* Chat container styles */
-        .chat-container {
-            height: calc(100vh - 180px);
-        }
-        
-        /* Message styles */
+        .sidebar-item.active svg { color: #f97316; }
+        .chat-container { height: calc(100vh - 180px); }
         .user-message {
             background-color: #f3f4f6;
             border-radius: 1rem 1rem 0 1rem;
@@ -58,8 +37,7 @@
             border-radius: 1rem 1rem 1rem 0;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
-        
-        /* Mobile sidebar styles */
+
         @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
@@ -68,10 +46,7 @@
                 transition: transform 0.3s ease-in-out;
             }
             
-            .sidebar.open {
-                transform: translateX(0);
-            }
-            
+            .sidebar.open { transform: translateX(0); }
             .sidebar-overlay {
                 display: none;
                 position: fixed;
@@ -83,32 +58,16 @@
                 z-index: 30;
             }
             
-            .sidebar-overlay.open {
-                display: block;
-            }
-            
-            .mobile-menu-button {
-                display: block;
-            }
+            .sidebar-overlay.open { display: block; }
+            .mobile-menu-button { display: block; }
         }
-        
+
         @media (min-width: 769px) {
-            .mobile-menu-button {
-                display: none;
-            }
-            
-            .sidebar-overlay {
-                display: none !important;
-            }
+            .mobile-menu-button { display: none; }
+            .sidebar-overlay { display: none !important; }
         }
-        
-        /* File upload button */
-        .file-upload {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-        }
-        
+
+        .file-upload { position: relative; overflow: hidden; display: inline-block; }
         .file-upload input[type="file"] {
             position: absolute;
             left: 0;
@@ -118,134 +77,26 @@
             height: 100%;
             cursor: pointer;
         }
-        
-        /* Uploaded image preview */
-        .uploaded-image {
+
+        .file-preview img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .chat-image {
             max-width: 300px;
-            max-height: 200px;
-            border-radius: 0.5rem;
-            margin-top: 0.5rem;
-            object-fit: contain;
-        }
-        
-        /* Loading spinner */
-        .spinner {
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* File preview in chat */
-        .file-preview-container {
-            margin-top: 0.5rem;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            border: 1px solid #e5e7eb;
-        }
-
-        .file-preview {
-            max-width: 100%;
-            max-height: 300px;
-            display: block;
-        }
-
-        /* Dark theme styles */
-        .dark {
-            background-color: #1a202c;
-            color: #e2e8f0;
-        }
-
-        .dark .bg-white {
-            background-color: #2d3748 !important;
-        }
-
-        .dark .bg-gray-50 {
-            background-color: #1a202c !important;
-        }
-
-        .dark .text-gray-800 {
-            color: #e2e8f0 !important;
-        }
-
-        .dark .text-gray-700 {
-            color: #cbd5e0 !important;
-        }
-
-        .dark .text-gray-500 {
-            color: #a0aec0 !important;
-        }
-
-        .dark .border-gray-300 {
-            border-color: #4a5568 !important;
-        }
-
-        .dark .border-t {
-            border-top-color: #4a5568 !important;
-        }
-
-        .dark .border-b {
-            border-bottom-color: #4a5568 !important;
-        }
-
-        .dark .user-message {
-            background-color: #2d3748 !important;
-            color: #e2e8f0 !important;
-        }
-
-        .dark .ai-message {
-            background-color: #4a5568 !important;
-            color: #e2e8f0 !important;
-        }
-
-        .dark .bg-gray-100 {
-            background-color: #4a5568 !important;
-        }
-
-        .dark .bg-gray-200 {
-            background-color: #4a5568 !important;
-        }
-
-        .dark .hover\:bg-gray-100:hover {
-            background-color: #4a5568 !important;
-        }
-
-        .dark .sidebar-item.active {
-            background-color: rgba(249, 168, 37, 0.2) !important;
-        }
-
-        .dark .chat-container {
-            background-color: #1a202c !important;
-        }
-
-        .dark .shadow {
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5) !important;
-        }
-
-        .dark .shadow-md {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.5) !important;
-        }
-
-        /* Delete button styles */
-        .delete-chat-btn {
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .sidebar-item:hover .delete-chat-btn {
-            opacity: 1;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 8px;
         }
     </style>
 </head>
-
 <body class="min-h-screen bg-gray-50">
-    <!-- Mobile Sidebar Overlay -->
     <div id="sidebarOverlay" class="sidebar-overlay"></div>
-    
     <div class="flex h-screen">
-        <!-- Sidebar -->
         <aside id="sidebar" class="sidebar w-64 bg-white shadow-md flex flex-col">
             <div class="p-5 flex items-center justify-between border-b">
                 <div class="flex items-center">
@@ -261,7 +112,6 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-
             <div class="flex-1 overflow-y-auto">
                 <div class="p-4 border-b">
                     <button id="newChatBtn" class="w-full flex items-center justify-center py-2 px-4 bg-gradient-to-r from-orange-500 to-pink-600 text-white rounded-lg hover:from-orange-600 hover:to-pink-700 transition-all">
@@ -269,24 +119,11 @@
                         New Chat
                     </button>
                 </div>
-                
                 <div class="p-4">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Recent Chats</h3>
-                        <div class="flex items-center space-x-2">
-                            <!-- Theme toggle button -->
-                            <button id="themeToggle" class="text-gray-500 hover:text-gray-700 p-1 rounded-full">
-                                <i class="fas fa-moon" id="themeIcon"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div id="chatHistory" class="space-y-1">
-                        <!-- Chat history will be populated here dynamically -->
-                    </div>
+                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Recent Chats</h3>
+                    <div id="chatHistory" class="space-y-1"></div>
                 </div>
             </div>
-
-            <!-- Settings -->
             <div class="p-4 border-t">
                 <div class="flex items-center space-x-3 p-2 text-gray-700 hover:bg-gray-100 rounded-lg cursor-pointer">
                     <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
@@ -296,16 +133,13 @@
                 </div>
             </div>
         </aside>
-
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Header -->
             <header class="bg-white shadow px-4 sm:px-6 py-4 flex justify-between items-center">
                 <div class="flex items-center">
                     <button id="mobileMenuButton" class="mobile-menu-button mr-4 text-gray-500 hover:text-gray-700">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <h1 id="currentChatTitle" class="text-lg sm:text-xl font-semibold text-gray-900">New Chat</h1>
+                    <h1 class="text-lg sm:text-xl font-semibold text-gray-900" id="chatTitle">New Chat</h1>
                 </div>
                 <div class="flex items-center space-x-4">
                     <button id="downloadChatBtn" class="text-gray-500 hover:text-gray-700" title="Download chat history">
@@ -316,53 +150,38 @@
                     </button>
                 </div>
             </header>
-
-            <!-- Chat Container -->
             <main class="flex-1 overflow-y-auto p-4 bg-gray-50 chat-container">
-                <!-- Chat messages -->
                 <div id="chatMessages" class="max-w-3xl mx-auto space-y-4">
-                    <!-- Messages will be added here dynamically -->
+                    <div class="flex space-x-3">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-pink-600 flex items-center justify-center text-white">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="ai-message p-4 max-w-[80%]">
+                            <p class="text-gray-800">Hello! I'm your AI assistant. How can I help you today?</p>
+                        </div>
+                    </div>
                 </div>
             </main>
-
-            <!-- Input Area -->
             <div class="bg-white border-t p-4">
                 <div class="max-w-3xl mx-auto">
-                    <!-- Uploaded files preview -->
-                    <div id="filePreviewContainer" class="mb-3 hidden">
-                        <div class="flex items-center bg-gray-100 rounded-lg p-2">
-                            <i class="fas fa-paperclip text-gray-500 mr-2"></i>
-                            <span id="fileName" class="text-sm text-gray-700 truncate"></span>
-                            <button id="removeFileBtn" class="ml-auto text-gray-500 hover:text-gray-700">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <img id="uploadedImagePreview" class="uploaded-image hidden mt-2" src="" alt="Uploaded image preview">
-                    </div>
-                    
+                    <div id="filePreview" class="mb-3 flex flex-wrap gap-2 hidden"></div>
                     <div class="flex items-end space-x-2">
-                        <!-- File upload button -->
                         <div class="file-upload">
                             <button type="button" class="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100">
                                 <i class="fas fa-paperclip"></i>
                             </button>
-                            <input type="file" id="fileInput" accept="image/*,.pdf,.doc,.docx,.txt" class="hidden">
+                            <input type="file" id="fileInput" accept="image/*,.pdf,.doc,.docx,.txt" multiple>
                         </div>
-                        
-                        <!-- Message input -->
                         <div class="flex-1 relative">
                             <textarea id="messageInput" rows="1" class="w-full p-3 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none" placeholder="Type your message..."></textarea>
                             <button class="absolute right-2 bottom-2 text-gray-500 hover:text-gray-700">
                                 <i class="far fa-smile"></i>
                             </button>
                         </div>
-                        
-                        <!-- Send button -->
                         <button id="sendMessageBtn" class="p-3 bg-gradient-to-r from-orange-500 to-pink-600 text-white rounded-lg hover:from-orange-600 hover:to-pink-700 transition-all">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
-                    
                     <p class="mt-2 text-xs text-gray-500 text-center">
                         AI Assistant may produce inaccurate information. Consider verifying important details.
                     </p>
@@ -370,627 +189,359 @@
             </div>
         </div>
     </div>
-
-    <!-- Download Modal -->
     <div id="downloadModal" class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden">
         <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 animate-fade-in">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-xl font-bold text-gray-800">Download Chat History</h3>
-                <button id="closeDownloadModalBtn" class="text-gray-500 hover:text-gray-700">
+                <button onclick="closeDownloadModal()" class="text-gray-500 hover:text-gray-700">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Format</label>
-                    <div class="grid grid-cols-3 gap-2">
-                        <button data-format="txt" class="download-format-btn py-2 px-3 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium">
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="downloadChat('txt')" class="py-2 px-3 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium">
                             <i class="fas fa-file-alt mr-1"></i> TXT
                         </button>
-                        <button data-format="docx" class="download-format-btn py-2 px-3 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium">
-                            <i class="fas fa-file-word mr-1"></i> DOCX
-                        </button>
-                        <button data-format="pdf" class="download-format-btn py-2 px-3 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium">
-                            <i class="fas fa-file-pdf mr-1"></i> PDF
+                        <button onclick="downloadChat('json')" class="py-2 px-3 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium">
+                            <i class="fas fa-file-code mr-1"></i> JSON
                         </button>
                     </div>
                 </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Include</label>
-                    <div class="space-y-2">
-                        <label class="flex items-center">
-                            <input type="checkbox" id="includeTimestamps" checked class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
-                            <span class="ml-2 text-sm text-gray-700">Timestamps</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" id="includeImages" checked class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
-                            <span class="ml-2 text-sm text-gray-700">Images</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" id="includeMetadata" class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
-                            <span class="ml-2 text-sm text-gray-700">Metadata (session info)</span>
-                        </label>
-                    </div>
-                </div>
-                
                 <div class="pt-4 border-t">
-                    <button id="confirmDownloadBtn" class="w-full py-2 px-4 bg-gradient-to-r from-orange-500 to-pink-600 text-white rounded-lg hover:from-orange-600 hover:to-pink-700 transition-all">
-                        <i class="fas fa-download mr-2"></i> Download
+                    <button onclick="closeDownloadModal()" class="w-full py-2 px-4 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-all">
+                        Cancel
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden">
-        <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 animate-fade-in">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-gray-800">Delete Chat</h3>
-                <button id="closeDeleteModalBtn" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <p class="text-gray-700 mb-6">Are you sure you want to delete this chat? This action cannot be undone.</p>
-            
-            <div class="flex justify-end space-x-3">
-                <button id="cancelDeleteBtn" class="py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all">
-                    Cancel
-                </button>
-                <button id="confirmDeleteBtn" class="py-2 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all">
-                    Delete
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // State variables
-        let currentChatId = Date.now().toString();
-        let chats = [];
-        let uploadedFile = null;
-        let chatToDelete = null;
-        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+        // Chat history storage
+        let chatHistory = [];
+        let currentChatId = null;
 
-        // DOM elements
+        // Mobile sidebar toggle
         const mobileMenuButton = document.getElementById('mobileMenuButton');
         const closeSidebarButton = document.getElementById('closeSidebar');
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            sidebarOverlay.classList.add('open');
+        });
+        
+        closeSidebarButton.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('open');
+        });
+        
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('open');
+        });
+
+        // File upload handling
         const fileInput = document.getElementById('fileInput');
-        const filePreviewContainer = document.getElementById('filePreviewContainer');
-        const fileName = document.getElementById('fileName');
-        const uploadedImagePreview = document.getElementById('uploadedImagePreview');
-        const removeFileBtn = document.getElementById('removeFileBtn');
-        const downloadChatBtn = document.getElementById('downloadChatBtn');
-        const downloadModal = document.getElementById('downloadModal');
-        const closeDownloadModalBtn = document.getElementById('closeDownloadModalBtn');
-        const confirmDownloadBtn = document.getElementById('confirmDownloadBtn');
+        const filePreview = document.getElementById('filePreview');
+        let uploadedFiles = [];
+
+        fileInput.addEventListener('change', (e) => {
+            uploadedFiles = Array.from(e.target.files);
+            filePreview.innerHTML = '';
+            uploadedFiles.forEach(file => {
+                const fileDiv = document.createElement('div');
+                fileDiv.className = 'flex items-center bg-gray-100 rounded-lg p-2';
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        fileDiv.innerHTML = `
+                            <img src="${e.target.result}" class="file-preview mr-2">
+                            <span class="text-sm text-gray-700 truncate">${file.name}</span>
+                            <button class="ml-auto text-gray-500 hover:text-gray-700" onclick="removeFile('${file.name}')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        `;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    fileDiv.innerHTML = `
+                        <i class="fas fa-paperclip text-gray-500 mr-2"></i>
+                        <span class="text-sm text-gray-700 truncate">${file.name}</span>
+                        <button class="ml-auto text-gray-500 hover:text-gray-700" onclick="removeFile('${file.name}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                }
+                filePreview.appendChild(fileDiv);
+            });
+            filePreview.classList.remove('hidden');
+        });
+
+        function removeFile(fileName) {
+            uploadedFiles = uploadedFiles.filter(file => file.name !== fileName);
+            updateFilePreview();
+            if (uploadedFiles.length === 0) {
+                filePreview.classList.add('hidden');
+            }
+        }
+
+        function updateFilePreview() {
+            filePreview.innerHTML = '';
+            uploadedFiles.forEach(file => {
+                const fileDiv = document.createElement('div');
+                fileDiv.className = 'flex items-center bg-gray-100 rounded-lg p-2';
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        fileDiv.innerHTML = `
+                            <img src="${e.target.result}" class="file-preview mr-2">
+                            <span class="text-sm text-gray-700 truncate">${file.name}</span>
+                            <button class="ml-auto text-gray-500 hover:text-gray-700" onclick="removeFile('${file.name}')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        `;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    fileDiv.innerHTML = `
+                        <i class="fas fa-paperclip text-gray-500 mr-2"></i>
+                        <span class="text-sm text-gray-700 truncate">${file.name}</span>
+                        <button class="ml-auto text-gray-500 hover:text-gray-700" onclick="removeFile('${file.name}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                }
+                filePreview.appendChild(fileDiv);
+            });
+        }
+
+        // Chat handling
         const newChatBtn = document.getElementById('newChatBtn');
+        const chatMessages = document.getElementById('chatMessages');
         const messageInput = document.getElementById('messageInput');
         const sendMessageBtn = document.getElementById('sendMessageBtn');
-        const chatMessages = document.getElementById('chatMessages');
-        const chatHistory = document.getElementById('chatHistory');
-        const currentChatTitle = document.getElementById('currentChatTitle');
-        const downloadFormatBtns = document.querySelectorAll('.download-format-btn');
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const deleteModal = document.getElementById('deleteModal');
-        const closeDeleteModalBtn = document.getElementById('closeDeleteModalBtn');
-        const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        const chatHistoryContainer = document.getElementById('chatHistory');
+        const chatTitle = document.getElementById('chatTitle');
 
-        // Initialize the app
-        function init() {
-            // Apply saved theme preference
-            applyTheme();
-            
-            loadChatHistory();
-            setupEventListeners();
-            addWelcomeMessage();
-        }
+        newChatBtn.addEventListener('click', () => {
+            const newChat = {
+                id: Date.now().toString(),
+                title: `Chat ${chatHistory.length + 1}`,
+                messages: []
+            };
+            chatHistory.push(newChat);
+            currentChatId = newChat.id;
+            updateChatHistory();
+            updateChatMessages();
+            chatTitle.textContent = newChat.title;
+            messageInput.value = '';
+            filePreview.classList.add('hidden');
+            uploadedFiles = [];
+        });
 
-        // Apply dark/light theme
-        function applyTheme() {
-            if (isDarkMode) {
-                document.body.classList.add('dark');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-            } else {
-                document.body.classList.remove('dark');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
-            }
-        }
-
-        // Toggle dark/light theme
-        function toggleTheme() {
-            isDarkMode = !isDarkMode;
-            localStorage.setItem('darkMode', isDarkMode);
-            applyTheme();
-        }
-
-        // Load chat history from localStorage
-        function loadChatHistory() {
-            const savedChats = localStorage.getItem('aiAssistantChats');
-            if (savedChats) {
-                chats = JSON.parse(savedChats);
-                renderChatHistory();
-                
-                // If there are chats, load the most recent one
-                if (chats.length > 0) {
-                    loadChat(chats[0].id);
-                }
-            }
-        }
-
-        // Save chats to localStorage
-        function saveChats() {
-            localStorage.setItem('aiAssistantChats', JSON.stringify(chats));
-        }
-
-        // Setup all event listeners
-        function setupEventListeners() {
-            // Mobile sidebar toggle
-            mobileMenuButton.addEventListener('click', toggleSidebar);
-            closeSidebarButton.addEventListener('click', toggleSidebar);
-            sidebarOverlay.addEventListener('click', toggleSidebar);
-            
-            // File upload handling - fixed to properly handle file selection
-            fileInput.addEventListener('change', handleFileUpload);
-            removeFileBtn.addEventListener('click', removeUploadedFile);
-            
-            // Download modal handling
-            downloadChatBtn.addEventListener('click', openDownloadModal);
-            closeDownloadModalBtn.addEventListener('click', closeDownloadModal);
-            confirmDownloadBtn.addEventListener('click', downloadChatHistory);
-            
-            // Format selection buttons
-            downloadFormatBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    downloadFormatBtns.forEach(b => b.classList.remove('border-orange-500', 'bg-orange-50'));
-                    btn.classList.add('border-orange-500', 'bg-orange-50');
-                });
-            });
-            
-            // New chat button
-            newChatBtn.addEventListener('click', createNewChat);
-            
-            // Message input handling
-            messageInput.addEventListener('input', autoResizeTextarea);
-            sendMessageBtn.addEventListener('click', sendMessage);
-            messageInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
+        function updateChatHistory() {
+            chatHistoryContainer.innerHTML = '';
+            chatHistory.forEach(chat => {
+                const chatItem = document.createElement('a');
+                chatItem.href = '#';
+                chatItem.className = `sidebar-item flex items-center py-2 px-3 text-gray-700 hover:bg-gray-100 rounded-lg ${chat.id === currentChatId ? 'active' : ''}`;
+                chatItem.innerHTML = `
+                    <i class="fas fa-comment-alt mr-3 text-gray-500"></i>
+                    <span class="truncate">${chat.title}</span>
+                `;
+                chatItem.addEventListener('click', (e) => {
                     e.preventDefault();
-                    sendMessage();
-                }
-            });
-            
-            // Theme toggle
-            themeToggle.addEventListener('click', toggleTheme);
-            
-            // Delete modal handling
-            closeDeleteModalBtn.addEventListener('click', closeDeleteModal);
-            cancelDeleteBtn.addEventListener('click', closeDeleteModal);
-            confirmDeleteBtn.addEventListener('click', deleteSelectedChat);
-        }
-
-        // Toggle sidebar visibility
-        function toggleSidebar() {
-            sidebar.classList.toggle('open');
-            sidebarOverlay.classList.toggle('open');
-        }
-
-        // Handle file upload - fixed to properly handle file selection
-        function handleFileUpload(e) {
-            const files = e.target.files;
-            if (files && files.length > 0) {
-                uploadedFile = files[0];
-                fileName.textContent = uploadedFile.name;
-                filePreviewContainer.classList.remove('hidden');
-                
-                // If it's an image, show preview
-                if (uploadedFile.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                        uploadedImagePreview.src = event.target.result;
-                        uploadedImagePreview.classList.remove('hidden');
-                    };
-                    reader.readAsDataURL(uploadedFile);
-                } else {
-                    uploadedImagePreview.classList.add('hidden');
-                }
-            }
-        }
-
-        // Remove uploaded file
-        function removeUploadedFile() {
-            uploadedFile = null;
-            fileInput.value = '';
-            filePreviewContainer.classList.add('hidden');
-            uploadedImagePreview.classList.add('hidden');
-        }
-
-        // Download modal functions
-        function openDownloadModal() {
-            downloadModal.classList.remove('hidden');
-        }
-
-        function closeDownloadModal() {
-            downloadModal.classList.add('hidden');
-        }
-
-        // Delete modal functions
-        function openDeleteModal(chatId) {
-            chatToDelete = chatId;
-            deleteModal.classList.remove('hidden');
-        }
-
-        function closeDeleteModal() {
-            chatToDelete = null;
-            deleteModal.classList.add('hidden');
-        }
-
-        // Delete the selected chat
-        function deleteSelectedChat() {
-            if (!chatToDelete) return;
-            
-            // Remove from chats array
-            chats = chats.filter(chat => chat.id !== chatToDelete);
-            
-            // If we're currently viewing the deleted chat, create a new one
-            if (currentChatId === chatToDelete) {
-                createNewChat();
-            }
-            
-            // Save and update UI
-            saveChats();
-            renderChatHistory();
-            closeDeleteModal();
-            showToast('Chat deleted successfully');
-        }
-
-        // Download chat history
-        function downloadChatHistory() {
-            const selectedFormat = document.querySelector('.download-format-btn.border-orange-500')?.dataset.format || 'txt';
-            const includeTimestamps = document.getElementById('includeTimestamps').checked;
-            const includeImages = document.getElementById('includeImages').checked;
-            const includeMetadata = document.getElementById('includeMetadata').checked;
-            
-            // Get current chat messages
-            const currentChat = chats.find(chat => chat.id === currentChatId);
-            if (!currentChat) return;
-            
-            // Create download content based on format
-            let content = '';
-            let filename = `ai_assistant_chat_${currentChatId}.${selectedFormat}`;
-            
-            if (includeMetadata) {
-                content += `AI Assistant Chat - ${currentChat.title}\n`;
-                content += `Date: ${new Date().toLocaleString()}\n\n`;
-            }
-            
-            currentChat.messages.forEach(msg => {
-                if (includeTimestamps) {
-                    const time = new Date(msg.timestamp).toLocaleTimeString();
-                    content += `[${time}] `;
-                }
-                
-                content += `${msg.sender === 'user' ? 'You' : 'AI Assistant'}: ${msg.text}\n`;
-                
-                if (msg.image && includeImages) {
-                    content += `[Image: ${msg.image.name}]\n`;
-                }
-                
-                content += '\n';
-            });
-            
-            // Create download link
-            const blob = new Blob([content], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            closeDownloadModal();
-            showToast('Chat downloaded successfully!');
-        }
-
-        // Create a new chat
-        function createNewChat() {
-            currentChatId = Date.now().toString();
-            currentChatTitle.textContent = 'New Chat';
-            chatMessages.innerHTML = '';
-            uploadedFile = null;
-            filePreviewContainer.classList.add('hidden');
-            messageInput.value = '';
-            
-            addWelcomeMessage();
-            toggleSidebar();
-        }
-
-        // Load a specific chat
-        function loadChat(chatId) {
-            const chat = chats.find(c => c.id === chatId);
-            if (!chat) return;
-            
-            currentChatId = chatId;
-            currentChatTitle.textContent = chat.title;
-            chatMessages.innerHTML = '';
-            
-            chat.messages.forEach(msg => {
-                addMessageToChat(msg.sender, msg.text, msg.image);
-            });
-            
-            // Mark as active in sidebar
-            document.querySelectorAll('.sidebar-item').forEach(item => {
-                item.classList.remove('active');
-                if (item.dataset.chatId === chatId) {
-                    item.classList.add('active');
-                }
-            });
-            
-            toggleSidebar();
-            scrollToBottom();
-        }
-
-        // Add welcome message
-        function addWelcomeMessage() {
-            addMessageToChat('ai', "Hello! I'm your AI assistant. How can I help you today?");
-        }
-
-        // Send a message
-        function sendMessage() {
-            const message = messageInput.value.trim();
-            if (!message && !uploadedFile) return;
-            
-            // Add user message
-            const imageData = uploadedFile ? {
-                name: uploadedFile.name,
-                type: uploadedFile.type,
-                url: uploadedFile.type.startsWith('image/') ? URL.createObjectURL(uploadedFile) : null
-            } : null;
-            
-            addMessageToChat('user', message, imageData);
-            
-            // Save to chat history
-            const currentChatIndex = chats.findIndex(chat => chat.id === currentChatId);
-            
-            if (currentChatIndex === -1) {
-                // New chat
-                const chatTitle = message.length > 30 ? message.substring(0, 30) + '...' : message || 'File shared';
-                chats.unshift({
-                    id: currentChatId,
-                    title: chatTitle,
-                    messages: [{
-                        sender: 'user',
-                        text: message,
-                        image: imageData,
-                        timestamp: Date.now()
-                    }]
+                    currentChatId = chat.id;
+                    updateChatHistory();
+                    updateChatMessages();
+                    chatTitle.textContent = chat.title;
                 });
-                currentChatTitle.textContent = chatTitle;
+                chatHistoryContainer.appendChild(chatItem);
+            });
+        }
+
+        function generateDynamicResponse(message, files) {
+            // Simulated AI response (since I can't call an actual AI API)
+            let response = '';
+            if (message && files.length > 0) {
+                response = `I've received your prompt: "${message}" and ${files.length} file(s) (${files.map(f => f.name).join(', ')}). The images appear to be relevant to your request. Could you specify what you want to do with these images? For example, are you seeking analysis, feedback, or something else?`;
+            } else if (message) {
+                response = `Thanks for your prompt: "${message}". Could you provide more details or upload any relevant images to help me assist you better?`;
+            } else if (files.length > 0) {
+                response = `I've received ${files.length} file(s) (${files.map(f => f.name).join(', ')}) without a prompt. Please provide a description or question about these images so I can assist you further.`;
             } else {
-                // Existing chat
-                chats[currentChatIndex].messages.push({
-                    sender: 'user',
-                    text: message,
-                    image: imageData,
-                    timestamp: Date.now()
-                });
+                response = `No prompt or files provided. Please share a message or upload files to continue.`;
             }
-            
-            // Clear input
-            messageInput.value = '';
-            messageInput.style.height = 'auto';
-            removeUploadedFile();
-            
-            // Save chats
-            saveChats();
-            renderChatHistory();
-            
-            // Simulate AI response
-            simulateAIResponse(message, imageData);
+            return response;
         }
 
-        // Simulate AI response (in a real app, this would be an API call)
-        function simulateAIResponse(userMessage, imageData) {
-            // Show loading indicator
-            const loadingId = `loading-${Date.now()}`;
-            chatMessages.insertAdjacentHTML('beforeend', `
-                <div id="${loadingId}" class="flex space-x-3">
+        function updateChatMessages() {
+            chatMessages.innerHTML = `
+                <div class="flex space-x-3">
                     <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-pink-600 flex items-center justify-center text-white">
                         <i class="fas fa-robot"></i>
                     </div>
                     <div class="ai-message p-4 max-w-[80%]">
-                        <div class="flex items-center space-x-2">
-                            <div class="spinner">
-                                <i class="fas fa-circle-notch"></i>
-                            </div>
-                            <span class="text-gray-500">AI is thinking...</span>
-                        </div>
+                        <p class="text-gray-800">Hello! I'm your AI assistant. How can I help you today?</p>
                     </div>
                 </div>
-            `);
-            scrollToBottom();
-            
-            // Simulate API delay
-            setTimeout(() => {
-                // Remove loading indicator
-                const loadingElement = document.getElementById(loadingId);
-                if (loadingElement) loadingElement.remove();
-                
-                // Generate response based on user input and image
-                let responseText = "I'm your AI response. In a real implementation, this would come from an API.";
-                
-                if (userMessage.toLowerCase().includes('hello') || userMessage.toLowerCase().includes('hi')) {
-                    responseText = "Hello there! How can I assist you today?";
-                } else if (userMessage.toLowerCase().includes('project')) {
-                    responseText = "I can help with project planning, requirements gathering, and documentation. What specific aspect of your project would you like to discuss?";
-                } else if (imageData) {
-                    if (imageData.type.startsWith('image/')) {
-                        responseText = "Thanks for sharing the image! I can see this is an image. What would you like to know about it?";
-                    } else {
-                        responseText = "Thanks for sharing the file. How can I help you with this document?";
-                    }
-                } else if (!userMessage && imageData) {
-                    responseText = "Thanks for sharing the file. How can I help you with this?";
-                }
-                
-                // Add AI response
-                addMessageToChat('ai', responseText);
-                
-                // Save to chat history
-                const currentChatIndex = chats.findIndex(chat => chat.id === currentChatId);
-                if (currentChatIndex !== -1) {
-                    chats[currentChatIndex].messages.push({
-                        sender: 'ai',
-                        text: responseText,
-                        timestamp: Date.now()
-                    });
-                    saveChats();
-                }
-            }, 1500);
-        }
-
-        // Add a message to the chat UI
-        function addMessageToChat(sender, text, file = null) {
-            const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            
-            if (sender === 'user') {
-                chatMessages.insertAdjacentHTML('beforeend', `
-                    <div class="flex space-x-3 justify-end animate-fade-in">
-                        <div class="user-message p-4 max-w-[80%]">
-                            ${text ? `<p class="text-gray-800">${text}</p>` : ''}
-                            ${file ? renderFilePreview(file) : ''}
-                            <p class="text-xs text-gray-500 mt-1 text-right">${timestamp}</p>
-                        </div>
-                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                            <i class="fas fa-user text-gray-600"></i>
-                        </div>
-                    </div>
-                `);
-            } else {
-                chatMessages.insertAdjacentHTML('beforeend', `
-                    <div class="flex space-x-3 animate-fade-in">
-                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-pink-600 flex items-center justify-center text-white">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="ai-message p-4 max-w-[80%]">
-                            <p class="text-gray-800">${text}</p>
-                            <p class="text-xs text-gray-500 mt-1">${timestamp}</p>
-                        </div>
-                    </div>
-                `);
-            }
-            
-            scrollToBottom();
-        }
-
-        // Render file preview in chat
-        function renderFilePreview(file) {
-            if (!file) return '';
-            
-            if (file.type.startsWith('image/') && file.url) {
-                return `
-                    <div class="file-preview-container">
-                        <img src="${file.url}" alt="Uploaded file" class="file-preview">
-                    </div>
-                `;
-            } else {
-                return `
-                    <div class="mt-2 flex items-center bg-gray-100 rounded-lg p-2">
-                        <i class="fas fa-file text-gray-500 mr-2"></i>
-                        <span class="text-sm text-gray-700 truncate">${file.name}</span>
-                    </div>
-                `;
-            }
-        }
-
-        // Render chat history in sidebar
-        function renderChatHistory() {
-            chatHistory.innerHTML = '';
-            
-            chats.forEach(chat => {
-                const isActive = chat.id === currentChatId;
-                const lastMessage = chat.messages[chat.messages.length - 1];
-                let previewText = '';
-                
-                if (lastMessage) {
-                    if (lastMessage.text) {
-                        previewText = lastMessage.text.length > 25 ? 
-                            lastMessage.text.substring(0, 25) + '...' : 
-                            lastMessage.text;
-                    } else if (lastMessage.image) {
-                        previewText = `[${lastMessage.image.type.startsWith('image/') ? 'Image' : 'File'}] ${lastMessage.image.name}`;
-                    }
-                } else {
-                    previewText = 'New chat';
-                }
-                
-                chatHistory.insertAdjacentHTML('beforeend', `
-                    <div class="sidebar-item ${isActive ? 'active' : ''} flex items-center justify-between py-2 px-3 text-gray-700 hover:bg-gray-100 rounded-lg">
-                        <a href="#" data-chat-id="${chat.id}" class="flex-1 flex items-center min-w-0">
-                            <i class="fas fa-comment-alt mr-3 text-gray-500"></i>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium truncate">${chat.title}</p>
-                                <p class="text-xs text-gray-500 truncate">${previewText}</p>
+            `;
+            const currentChat = chatHistory.find(chat => chat.id === currentChatId);
+            if (currentChat) {
+                currentChat.messages.forEach(msg => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `flex space-x-3 ${msg.role === 'user' ? 'justify-end' : ''}`;
+                    const content = msg.content ? `<p class="text-gray-800">${msg.content}</p>` : '';
+                    messageDiv.innerHTML = `
+                        ${msg.role === 'user' ? '' : `
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-pink-600 flex items-center justify-center text-white">
+                                <i class="fas fa-robot"></i>
                             </div>
-                        </a>
-                        <button class="delete-chat-btn text-gray-400 hover:text-red-500 p-1" data-chat-id="${chat.id}" title="Delete chat">
-                            <i class="fas fa-trash text-xs"></i>
-                        </button>
-                    </div>
-                `);
-            });
-            
-            // Add click event to chat history items
-            document.querySelectorAll('a[data-chat-id]').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    loadChat(item.dataset.chatId);
+                        `}
+                        <div class="${msg.role}-message p-4 max-w-[80%]">
+                            ${content}
+                            ${msg.files ? msg.files.map(file => file.data && file.type.startsWith('image/') ? `
+                                <img src="${file.data}" alt="${file.name}" class="chat-image">
+                            ` : `
+                                <div class="mt-2 text-sm text-gray-600">[Attached: ${file.name}]</div>
+                            `).join('') : ''}
+                        </div>
+                        ${msg.role === 'user' ? `
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-user text-gray-600"></i>
+                            </div>
+                        ` : ''}
+                    `;
+                    chatMessages.appendChild(messageDiv);
                 });
-            });
-            
-            // Add click event to delete buttons
-            document.querySelectorAll('.delete-chat-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    openDeleteModal(btn.dataset.chatId);
-                });
-            });
-        }
-
-        // Auto-resize textarea
-        function autoResizeTextarea() {
-            messageInput.style.height = 'auto';
-            messageInput.style.height = (messageInput.scrollHeight) + 'px';
-        }
-
-        // Scroll chat to bottom
-        function scrollToBottom() {
+            }
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // Show toast notification
-        function showToast(message) {
-            const toast = document.createElement('div');
-            toast.className = 'fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in';
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.remove();
-            }, 3000);
+        sendMessageBtn.addEventListener('click', () => {
+            const message = messageInput.value.trim();
+            const currentChat = chatHistory.find(chat => chat.id === currentChatId);
+            if (!currentChat) return;
+
+            const files = uploadedFiles.map(file => ({
+                name: file.name,
+                type: file.type,
+                data: file.type.startsWith('image/') ? (new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.readAsDataURL(file);
+                })) : null
+            }));
+
+            Promise.all(files.map(f => f.data || Promise.resolve(null))).then(fileData => {
+                const userFiles = files.map((file, index) => ({
+                    name: file.name,
+                    type: file.type,
+                    data: fileData[index]
+                }));
+
+                // Add user message (prompt and/or files)
+                if (message || userFiles.length > 0) {
+                    currentChat.messages.push({
+                        role: 'user',
+                        content: message || '',
+                        files: userFiles.length > 0 ? userFiles : null,
+                        timestamp: new Date().toISOString()
+                    });
+
+                    // Add dynamic AI response
+                    currentChat.messages.push({
+                        role: 'ai',
+                        content: generateDynamicResponse(message, userFiles),
+                        timestamp: new Date().toISOString()
+                    });
+
+                    updateChatMessages();
+                    messageInput.value = '';
+                    messageInput.style.height = 'auto';
+                    filePreview.classList.add('hidden');
+                    uploadedFiles = [];
+                    fileInput.value = '';
+                }
+            });
+        });
+
+        messageInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessageBtn.click();
+            }
+        });
+
+        messageInput.addEventListener('input', () => {
+            messageInput.style.height = 'auto';
+            messageInput.style.height = (messageInput.scrollHeight) + 'px';
+        });
+
+        // Download handling
+        const downloadChatBtn = document.getElementById('downloadChatBtn');
+        const downloadModal = document.getElementById('downloadModal');
+        
+        function openDownloadModal() {
+            downloadModal.classList.remove('hidden');
+        }
+        
+        function closeDownloadModal() {
+            downloadModal.classList.add('hidden');
+        }
+        
+        downloadChatBtn.addEventListener('click', openDownloadModal);
+
+        function downloadChat(format) {
+            const currentChat = chatHistory.find(chat => chat.id === currentChatId);
+            if (!currentChat) return;
+
+            let content;
+            if (format === 'txt') {
+                content = currentChat.messages.map(msg => 
+                    `${msg.timestamp} [${msg.role.toUpperCase()}]: ${msg.content || '[No text]'}${
+                        msg.files ? `\n[Attached: ${msg.files.map(f => f.name).join(', ')}]` : ''
+                    }`
+                ).join('\n\n');
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${currentChat.title}.txt`;
+                a.click();
+                URL.revokeObjectURL(url);
+            } else if (format === 'json') {
+                content = JSON.stringify({
+                    id: currentChat.id,
+                    title: currentChat.title,
+                    messages: currentChat.messages.map(msg => ({
+                        role: msg.role,
+                        content: msg.content || '',
+                        timestamp: msg.timestamp,
+                        files: msg.files ? msg.files.map(file => ({
+                            name: file.name,
+                            type: file.type,
+                            data: file.data // Include base64 data for images
+                        })) : null
+                    }))
+                }, null, 2);
+                const blob = new Blob([content], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${currentChat.title}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+            closeDownloadModal();
         }
 
-        // Initialize the app
-        document.addEventListener('DOMContentLoaded', init);
+        // Initialize new chat
+        newChatBtn.click();
     </script>
 </body>
-</html>
+</html> 
